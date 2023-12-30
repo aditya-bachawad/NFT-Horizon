@@ -26,7 +26,7 @@ export default function Hero() {
 
   const mintText = "Create your art and mint 'images' or 'gif' as NFT.";
   const collectionText =
-    "Create OpenRiver collection on mumbai testnet. A place to Store minted NFTs.";
+    "Create NFT Horizon collection on mumbai testnet. A place to Store minted NFTs.";
   const listText =
     "Once NFT is minted, list them on this marketplace for others to buy.";
 
