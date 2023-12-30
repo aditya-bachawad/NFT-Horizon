@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
-import { useAddress, useContract, useSDK } from "@thirdweb-dev/react";
-import { useEffect, useState } from "react";
+import { useAddress, useContract, useSDK } from '@thirdweb-dev/react';
+import { useEffect, useState } from 'react';
+import { dotenv } from 'dotenv';
 
 export default function useThirdWeb() {
   const [listings, setListings] = useState([]);
@@ -9,11 +10,11 @@ export default function useThirdWeb() {
   const address = useAddress();
   const sdk = useSDK();
   const { contract } = useContract(
-    "0x29563a327112f458b25Fb42A52cf081A0C0d51ba"
+    '0x29563a327112f458b25Fb42A52cf081A0C0d51ba'
   );
 
   const { contract: collectionContract } = useContract(
-    "0xC4A0468Cd9c06D1D398E27d7C84758d75564f107"
+    '0xC4A0468Cd9c06D1D398E27d7C84758d75564f107'
   );
 
   useEffect(() => {
@@ -26,7 +27,7 @@ export default function useThirdWeb() {
   //! Fetching all the listings
   const getListings = async () => {
     try {
-      if (!!listings.length) throw "Restricting re-fetch";
+      if (!!listings.length) throw 'Restricting re-fetch';
       const list = await contract.getAllListings();
       setListings(list);
       setIsLoading(false);
@@ -40,8 +41,8 @@ export default function useThirdWeb() {
   const createCollection = async () => {
     try {
       const contractAddress = await sdk.deployer.deployNFTCollection({
-        name: "OpenRiver",
-        name: "RIVR",
+        name: 'OpenRiver',
+        name: 'RIVR',
         // this address comes from connected wallet address
         primary_sale_recipient: address,
       });
@@ -54,9 +55,9 @@ export default function useThirdWeb() {
   const createDirectListing = async () => {
     const listing = {
       //TODO address of the contract the asset you want to list is on
-      assetContractAddress: "0x...",
+      assetContractAddress: '0x...',
       // token ID of the asset you want to list
-      tokenId: "0",
+      tokenId: '0',
       // when should the listing open up for offers
       startTimestamp: new Date(),
       // how long the listing will be open for
@@ -64,9 +65,9 @@ export default function useThirdWeb() {
       // how many of the asset you want to list
       quantity: 1,
       // address of the currency contract that will be used to pay for the listing
-      currencyContractAddress: "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE",
+      currencyContractAddress: '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE',
       // how much the asset will be sold for
-      buyoutPricePerToken: "1.5",
+      buyoutPricePerToken: '1.5',
     };
 
     const tx = await contract.direct.createListing(listing);
@@ -100,11 +101,10 @@ export default function useThirdWeb() {
 
     try {
       const res = await fetch(url, {
-        method: "GET",
+        method: 'GET',
         headers: {
-          accept: "application/json",
-          "X-API-Key":
-            "8SdNPyuDmzLJLVhYIWuchPbkjSQ9CWuBNxrA4ZWjyj6dozJKqWpEqM2uyCJJSTdt",
+          accept: 'application/json',
+          'X-API-Key': process.env.MORALIS_API_KEY,
         },
       });
       const data = await res.json();
