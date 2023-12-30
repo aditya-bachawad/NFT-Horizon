@@ -46,7 +46,7 @@ export default function Footer() {
       </div>
       <div className={styles.logo}>
         <img src='https://i.imgur.com/UhzOw1n.png' alt='logo' />
-        <h2>OpenRiver</h2>
+        <h2>NFT Horizon</h2>
       </div>
     </div>
   );
